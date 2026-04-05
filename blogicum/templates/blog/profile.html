@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Профиль {{ profile.username }}
+{% endblock %}
+
+{% block content %}
+
+<h1>Профиль @{{ profile.username }}</h1>
+
+<p>
+  Имя: {{ profile.first_name }} <br>
+  Фамилия: {{ profile.last_name }} <br>
+  Email: {{ profile.email }}
+</p>
+
+{% if user == profile %}
+  <a href="{% url 'blog:edit_profile' %}">Редактировать профиль</a>
+  <br>
+  <a href="{% url 'password_change' %}">Сменить пароль</a>
+{% endif %}
+
+<hr>
+
+<h2>Публикации пользователя</h2>
+
+{% if post.image %}
+  <img src="{{ post.image.url }}" alt="">
+{% endif %}
+
+{% for post in page_obj %}
+  {{ post.title }}
+  Комментарии: {{ post.comment_count }}
+{% endfor %}
+
+<div>
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+  {% endif %}
+
+  <span>Страница {{ page_obj.number }}</span>
+
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Вперёд</a>
+  {% endif %}
+</div>
+
+{% endblock %}
