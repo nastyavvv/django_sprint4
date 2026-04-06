@@ -15,9 +15,19 @@
   </head>
   <body>
     {% include "includes/header.html" %}
+
+    {% if user.is_authenticated %}
+      <div class="container mt-3">
+        <div class="text-end">
+          <a href="{% url 'blog:post_create' %}" class="btn btn-success btn-lg">
+            Создать новый пост
+          </a>
+        </div>
+      </div>
+    {% endif %}
     <main>
       <div class="container py-5">
-      {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
       </div>
     </main>
     {% include "includes/footer.html" %}   

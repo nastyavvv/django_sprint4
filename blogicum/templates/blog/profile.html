@@ -14,20 +14,17 @@
             
             <dl class="row mt-4">
               <dt class="col-sm-3">Имя:</dt>
-              <dd class="col-sm-9">{{ profile.first_name }}</dd>
-              
+              <dd class="col-sm-9">{{ profile.first_name|default:"Не указано" }}</dd>
+
               <dt class="col-sm-3">Фамилия:</dt>
-              <dd class="col-sm-9">{{ profile.last_name }}</dd>
-              
+              <dd class="col-sm-9">{{ profile.last_name|default:"Не указано" }}</dd>
+
               <dt class="col-sm-3">Email:</dt>
-              <dd class="col-sm-9">{{ profile.email }}</dd>
+              <dd class="col-sm-9">{{ profile.email|default:"Не указан" }}</dd>
             </dl>
 
             {% if user == profile %}
               <div class="mt-4">
-                <a href="{% url 'blog:post_create' %}" class="btn btn-success">
-            ➕ Создать новый пост
-                </a>
                 <a href="{% url 'blog:edit_profile' %}" class="btn btn-primary">
                 Редактировать профиль
                 </a>
