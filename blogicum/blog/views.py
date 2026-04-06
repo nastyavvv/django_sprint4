@@ -76,7 +76,6 @@ def post_create(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            # post.pub_date = timezone.now()  ← УДАЛИТЬ ЭТУ СТРОКУ
             post.save()
             return redirect('blog:profile', username=request.user.username)
     else:

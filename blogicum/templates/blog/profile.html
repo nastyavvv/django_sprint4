@@ -22,9 +22,12 @@
               <dt class="col-sm-3">Email:</dt>
               <dd class="col-sm-9">{{ profile.email }}</dd>
             </dl>
-       
+
             {% if user == profile %}
               <div class="mt-4">
+                <a href="{% url 'blog:post_create' %}" class="btn btn-success">
+            ➕ Создать новый пост
+                </a>
                 <a href="{% url 'blog:edit_profile' %}" class="btn btn-primary">
                 Редактировать профиль
                 </a>
