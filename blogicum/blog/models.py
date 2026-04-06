@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -67,6 +68,7 @@ class Post(models.Model):
         verbose_name='Текст'
     )
     pub_date = models.DateTimeField(
+        default=timezone.now,
         verbose_name='Дата и время публикации',
         help_text='Если установить дату и время в будущем — '
                   'можно делать отложенные публикации.'

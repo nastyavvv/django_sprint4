@@ -5,44 +5,55 @@
 {% endblock %}
 
 {% block content %}
-
-<h1>Профиль @{{ profile.username }}</h1>
-
-<p>
-  Имя: {{ profile.first_name }} <br>
-  Фамилия: {{ profile.last_name }} <br>
-  Email: {{ profile.email }}
-</p>
-
-{% if user == profile %}
-  <a href="{% url 'blog:edit_profile' %}">Редактировать профиль</a>
-  <br>
-  <a href="{% url 'password_change' %}">Сменить пароль</a>
-{% endif %}
-
-<hr>
-
-<h2>Публикации пользователя</h2>
-
-{% if post.image %}
-  <img src="{{ post.image.url }}" alt="">
-{% endif %}
-
-{% for post in page_obj %}
-  {{ post.title }}
-  Комментарии: {{ post.comment_count }}
-{% endfor %}
-
-<div>
-  {% if page_obj.has_previous %}
-    <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
-  {% endif %}
-
-  <span>Страница {{ page_obj.number }}</span>
-
-  {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">Вперёд</a>
-  {% endif %}
-</div>
-
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">Профиль пользователя {{ profile.username }}</h1>
+            
+            <dl class="row mt-4">
+              <dt class="col-sm-3">Имя:</dt>
+              <dd class="col-sm-9">{{ profile.first_name }}</dd>
+              
+              <dt class="col-sm-3">Фамилия:</dt>
+              <dd class="col-sm-9">{{ profile.last_name }}</dd>
+              
+              <dt class="col-sm-3">Email:</dt>
+              <dd class="col-sm-9">{{ profile.email }}</dd>
+            </dl>
+       
+            {% if user == profile %}
+              <div class="mt-4">
+                <a href="{% url 'blog:edit_profile' %}" class="btn btn-primary">
+                Редактировать профиль
+                </a>
+                <a href="{% url 'password_change' %}" class="btn btn-secondary">
+                Сменить пароль
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="mb-4">Публикации пользователя</h2>
+        
+        {% for post in page_obj %}
+          {% include "includes/post_card.html" %}
+        {% empty %}
+          <div class="alert alert-info">
+            У пользователя пока нет публикаций.
+          </div>
+        {% endfor %}
+        
+        {% include "includes/paginator.html" %}
+      </div>
+    </div>
+  </div>
 {% endblock %}

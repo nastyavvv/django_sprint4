@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 
+{% block title %}
+  Редактирование комментария
+{% endblock %}
+
 {% block content %}
+  <h1>Редактирование комментария</h1>
+  
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Сохранить</button>
   </form>
+  
+  <a href="{% url 'blog:post_detail' post.id %}">Назад к посту</a>
 {% endblock %}

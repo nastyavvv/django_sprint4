@@ -3,12 +3,10 @@
   Лента записей
 {% endblock %}
 {% block content %}
-  <h1 class="mb-5">Лента записей</h1>
   {% for post in page_obj %}
-  {{ post.title }}
-  Комментарии: {{ post.comment_count }}
-{% endfor %}
-{% if post.image %}
-  <img src="{{ post.image.url }}" alt="">
-{% endif %}
+    <article class="mb-5">
+      {% include "includes/post_card.html" %}
+    </article>
+  {% endfor %}
+  {% include "includes/paginator.html" %}
 {% endblock %}

@@ -7,15 +7,11 @@
 {% block content %}
   <h1>Публикации в категории «{{ category.title }}»</h1>
   <p class="mb-5">{{ category.description }}</p>
-
-  {% if post.image %}
-  <img src="{{ post.image.url }}" alt="">
-{% endif %}
+  
 
   {% for post in page_obj %}
-  {{ post.title }}
-  Комментарии: {{ post.comment_count }}
-{% endfor %}
+  {% include "includes/post_card.html" %}
+  {% endfor %}
 
   <div>
     {% if page_obj.has_previous %}
